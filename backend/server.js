@@ -21,6 +21,13 @@ connection.once('open', () => {
 const userRouter = require('./routes/User');
 app.use('/user',userRouter);
 
+
+const WatchRouter = require('./routes/Watch');
+app.use('/watch',WatchRouter);
+
+const LaptopRouter = require('./routes/Laptop');
+app.use('/laptop',LaptopRouter);
+
 app.listen(5000,()=>{
     console.log('express server started');
 });
