@@ -67,6 +67,7 @@ userRouter.post('/product',passport.authenticate('jwt',{session : false}),(req,r
 });
 
 userRouter.get('/products',passport.authenticate('jwt',{session : false}),(req,res)=>{
+    console.log("get");
     User.findById({_id : req.user._id}).populate('products').exec((err,document)=>{
         if(err)
             res.status(500).json({message : {msgBody : "Error has occured", msgError: true}});

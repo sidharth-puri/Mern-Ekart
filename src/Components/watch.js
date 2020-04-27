@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import ProductService from '../Services/ProductService';
 import {Link} from 'react-router-dom';
 import './watch.css'
 import 'tachyons';
@@ -10,8 +11,19 @@ class Watch extends Component{
         this.state={
             watch1:[]
         }
+       this.handleClick = this.handleClick.bind(this);
     }
-
+    handleClick(ele){
+        const obj= {
+            link: ele.link,
+            title: ele.title,
+            price: ele.price
+        }
+        console.log(obj);
+        ProductService.postProduct(obj).then(data =>{
+            const{message}=data;
+        })
+    }
     componentDidMount(){
         console.log("Component is mounted");
         fetch('/watch')
@@ -39,7 +51,7 @@ class Watch extends Component{
                 <img src={ele.link} alt="Top" style={{width:"24vh",height:"24vh"}}/>
                 <h3 class="ma0 pa0">{ele.title}</h3>
                 <h4 class="ma0 pa0">{ele.price}</h4>
-                <button class="btn btn-danger shadow-lg ma0 pa0" style={{fontSize:"1.5rem"}} onClick={()=>this.fun(ele)} ><Link class="l1 black" to="/tt">Shop Now</Link></button>
+                <button class="btn btn-danger shadow-lg ma0 pa0" style={{fontSize:"1.5rem"}} onClick={()=> this.handleClick(ele)} >Shop Now</button>
                 </div> 
             )}
        </div>
