@@ -41,9 +41,7 @@ class Watch extends Component{
             <div className="t1 backgroundimg4">
                 <div class="bg">
                    <img src="https://worldtimer.com.hk/image/catalog/editoruploads/banner_08.jpg" alt="watch" class="img-fluid" />
-                   <div class="text-block">
-                       <p><b>Get AMAZING and STYLISH Watches</b></p>
-                   </div>
+                  
                 </div>
 
             {this.state.watch1.map(ele=>

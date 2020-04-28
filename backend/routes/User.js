@@ -66,6 +66,7 @@ userRouter.post('/product',passport.authenticate('jwt',{session : false}),(req,r
     })
 });
 
+
 userRouter.get('/products',passport.authenticate('jwt',{session : false}),(req,res)=>{
     console.log("get");
     User.findById({_id : req.user._id}).populate('products').exec((err,document)=>{
@@ -77,6 +78,12 @@ userRouter.get('/products',passport.authenticate('jwt',{session : false}),(req,r
     });
 });
 
+userRouter.route('/product/:id').delete((req, res) => {
+    console.log("deleted");
+    Product.findByIdAndDelete(req.params.id)
+      .then(() => res.json('Product deleted.'))
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
 userRouter.get('/admin',passport.authenticate('jwt',{session : false}),(req,res)=>{
     if(req.user.role === 'admin'){
         res.status(200).json({message : {msgBody : 'You are an admin', msgError : false}});
